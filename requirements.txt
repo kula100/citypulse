@@ -1,0 +1,16 @@
+black==24.10.0
+click==8.1.8
+DateTime==5.5
+mypy-extensions==1.0.0
+numpy==2.2.2
+packaging==24.2
+pandas==2.2.3
+pathspec==0.12.1
+platformdirs==4.3.6
+pyarrow==19.0.0
+python-dateutil==2.9.0.post0
+pytz==2024.2
+setuptools==75.8.0
+six==1.17.0
+tzdata==2025.1
+zope.interface==7.2
