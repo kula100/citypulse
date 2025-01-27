@@ -78,7 +78,7 @@ def main():
             if files:
                 logger.info("Files found for %s: %s", table, files)
                 upload_files_to_stage(cursor, table_name, files)
-                copy_files_to_table(cursor, table)
+                copy_files_to_table(cursor, table_name)
             else:
                 logger.info("No files found for %s", table)
     finally:
