@@ -28,10 +28,14 @@ jobs:
           TAG: v1.0
           DATASET_FILE_NAME: yelp_dataset_
           TARGET_DIR: dataset
+          FILE_URL: "https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}3.zip"
         run: |
+          echo $OWNER
+          echo $REPO
+          echo $TAG
+          echo $FILE_URL
           cd dags/ingestion
-          wget -P ./${TARGET_DIR} \
-            https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}3.zip
+          wget -P ./${TARGET_DIR} ${FILE_URL}
 
       - name: Extract datasets
         run: |
