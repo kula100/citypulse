@@ -50,7 +50,7 @@ jobs:
           pwd
           echo "${TARGET_DIR}/${DATASET_FILE_NAME}3.zip"
           for file in $(ls ${TARGET_DIR}/*.zip); do
-            unzip -o "$file" -d ${TARGET_DIR}/
+            unzip -o -j "$file" -d ${TARGET_DIR}/
           done
 
       - name: Upload to Snowflake tables

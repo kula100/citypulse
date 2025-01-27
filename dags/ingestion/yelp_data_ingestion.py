@@ -5,7 +5,6 @@ from utils import logger
 
 logger = logger()
 
-# Snowflake connection details
 SNOWFLAKE_ACCOUNT = os.getenv("SNOWFLAKE_ACCOUNT")
 SNOWFLAKE_USER = os.getenv("SNOWFLAKE_USER")
 SNOWFLAKE_PASSWORD = os.getenv("SNOWFLAKE_PASSWORD")
@@ -51,7 +50,6 @@ def copy_files_to_table(cursor, table_name):
     logger.info("Files copied into the table %s", table_name)
 
 def main():
-    # Connect to Snowflake
     conn = snowflake.connector.connect(
         user=SNOWFLAKE_USER,
         password=SNOWFLAKE_PASSWORD,
@@ -64,6 +62,7 @@ def main():
     cursor = conn.cursor()
 
     try:
+        cursor.execute(f"CREATE OR REPLACE STAGE {SNOWFLAKE_STAGE}")
         for table in tables:
             table_name = f"raw_{table}"
             create_table_query = f"""
@@ -77,6 +76,7 @@ def main():
             logger.info("%s table Created", table_name)
             files = glob.glob(os.path.join(TARGET_DIR, f"{table}_*.parquet"))
             if files:
+                logger.info("Files found for %s: %s", table, files)
                 upload_files_to_stage(cursor, table_name, files)
                 copy_files_to_table(cursor, table)
             else:
