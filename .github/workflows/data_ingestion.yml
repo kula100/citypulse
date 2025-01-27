@@ -2,6 +2,10 @@ name: Ingest Yelp data into Snowflake
 
 on:
   workflow_dispatch:
+    inputs:
+        version:
+          description: "Release version to download"
+          required: true
 
 jobs:
   download-and-upload-to-snowflake:
@@ -21,21 +25,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install snowflake-connector-python
 
+      - name: Set release var
+        id: vars
+        run: echo "RELEASE_VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+
+      - name: Get release assets
+        run: |
+          FILE_PATTERN="*_3.zip"
+          RELEASE_URL="https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ steps.vars.outputs.RELEASE_VERSION }}"
+          curl -s "$RELEASE_URL" | jq -r '.assets[] | select(.name | test("'"$FILE_PATTERN"'")) | .browser_download_url' > download_urls.txt
+          echo "Files to download:"
+          cat download_urls.txt
+
       - name: Download datasets
         env:
-          OWNER: ${GITHUB_REPOSITORY%%/*}
-          REPO: ${GITHUB_REPOSITORY##*/}
-          TAG: v1.0
           DATASET_FILE_NAME: yelp_dataset_
           TARGET_DIR: dataset
-          FILE_URL: "https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}3.zip"
         run: |
-          echo $OWNER
-          echo $REPO
-          echo $TAG
-          echo $FILE_URL
           cd dags/ingestion
-          wget -P ./${TARGET_DIR} ${FILE_URL}
+          while IFS= read -r url; do
+            wget -P ./dataset/ "$url"
+          done < download_urls.txt
+          echo "Downloaded files:"
+          ls -l ${TARGET_DIR}
 
       - name: Extract datasets
         run: |
