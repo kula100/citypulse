@@ -35,13 +35,20 @@ jobs:
           RELEASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.version }}/"
           DOWNLOAD_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
           wget -P ${TARGET_DIR} ${DOWNLOAD_URL}
+
+      - name: List downloaded files
+        run: |
           echo "Downloaded files:"
           ls -l ${TARGET_DIR}
+          pwd
 
       - name: Extract datasets
         run: |
+          pwd
           echo "${TARGET_DIR}/${DATASET_FILE_NAME}3.zip"
-          unzip -o ${TARGET_DIR}/${DATASET_FILE_NAME}3.zip -d ${TARGET_DIR}/
+          for file in $(ls ${TARGET_DIR}/*.zip); do
+            unzip -o "$file" -d ${TARGET_DIR}/
+          done
 
       - name: Upload to Snowflake tables
         env:
