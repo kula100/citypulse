@@ -19,29 +19,25 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install snowflake-connector-python datetime
+          pip install snowflake-connector-python
 
       - name: Download datasets
         env:
           OWNER: ${GITHUB_REPOSITORY%%/*}
           REPO: ${GITHUB_REPOSITORY##*/}
           TAG: v1.0
-          DATESET_FILE_NAME: yelp_dataset_
+          DATASET_FILE_NAME: yelp_dataset_
           TARGET_DIR: dataset
         run: |
-          cd daga/ingestion
+          cd dags/ingestion
           wget -P ./${TARGET_DIR} \
-            https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}1.zip \
-            https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}2.zip \
             https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}3.zip
 
       - name: Extract datasets
         run: |
-          unzip ${TARGET_DIR}/${DATASET_FILE_NAME}1.zip -d ${TARGET_DIR}
-          unzip ${TARGET_DIR}/${DATASET_FILE_NAME}2.zip -d ${TARGET_DIR}
           unzip ${TARGET_DIR}/${DATASET_FILE_NAME}3.zip -d ${TARGET_DIR}
 
-      - name: Upload to Snowflake and execute COPY INTO
+      - name: Upload to Snowflake tables
         env:
           SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
@@ -49,6 +45,12 @@ jobs:
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
           SNOWFLAKE_DATABASE: raw
           SNOWFLAKE_SCHEMA: yelp
-          SNOWFLAKE_STAGE: yelp_ingestion_stage # use this in the script to create a new stage as well and use for ingestion
+          SNOWFLAKE_STAGE: yelp_ingestion_stage
         run: |
           python yelp_data_ingestion.py
+
+# https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}1.zip \
+# https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}2.zip \
+
+# unzip ${TARGET_DIR}/${DATASET_FILE_NAME}1.zip -d ${TARGET_DIR}
+# unzip ${TARGET_DIR}/${DATASET_FILE_NAME}2.zip -d ${TARGET_DIR}
