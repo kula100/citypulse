@@ -44,7 +44,7 @@ def copy_files_to_table(cursor, table_name):
         COPY INTO {table_name}
         FROM (SELECT PARSE_JSON($1), CURRENT_TIMESTAMP
             FROM @{SNOWFLAKE_STAGE}/{table_name})
-        FILE_FORMAT = (TYPE = PARQUET COMPRESSION = GZIP)
+        FILE_FORMAT = (TYPE = PARQUET)
     """
     cursor.execute(copy_query)
     logger.info("Files copied into the table %s", table_name)
