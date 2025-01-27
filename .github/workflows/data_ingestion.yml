@@ -43,7 +43,8 @@ jobs:
 
       - name: Extract datasets
         run: |
-          unzip ${TARGET_DIR}/${DATASET_FILE_NAME}3.zip -d ${TARGET_DIR}
+          echo "${TARGET_DIR}/${DATASET_FILE_NAME}3.zip"
+          unzip -o ${TARGET_DIR}/${DATASET_FILE_NAME}3.zip -d ${TARGET_DIR}/
 
       - name: Upload to Snowflake tables
         env:
