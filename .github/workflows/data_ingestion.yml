@@ -15,6 +15,10 @@ jobs:
           DATASET_FILE_NAME: yelp_dataset_
           TARGET_DIR: dataset
 
+    defaults:
+      run:
+        working-directory: dags/ingestion
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,7 +35,6 @@ jobs:
 
       - name: Download datasets
         run: |
-          cd dags/ingestion
           RELEASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.version }}/"
           DOWNLOAD_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
           wget -P ${TARGET_DIR} ${DOWNLOAD_URL}
