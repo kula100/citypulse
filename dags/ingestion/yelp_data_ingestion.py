@@ -15,8 +15,7 @@ SNOWFLAKE_SCHEMA = "yelp"
 SNOWFLAKE_STAGE = os.getenv("SNOWFLAKE_STAGE")
 TARGET_DIR = os.getenv("TARGET_DIR")
 
-# tables = {"tip", "business", "checkin", "user", "review"}
-tables = {"tip", "business", "checkin"}
+tables = {"tip", "business", "checkin", "user", "review"}
 
 def upload_files_to_stage(cursor, table_name, files):
     """
