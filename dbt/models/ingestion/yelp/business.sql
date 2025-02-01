@@ -1,8 +1,9 @@
+{{ config(alias='view_business') }}
 
 with latest_data as (
     select raw_data
     from {{ source('raw_yelp', 'business') }}
-    qualify row_number() over (order by ingestion_datetime desc) = 1
+    qualify max(ingestion_datetime) over () = ingestion_datetime
 )
 
 select
@@ -16,8 +17,8 @@ select
     raw_data:longitude::float as longitude,
     raw_data:stars::float as stars,
     raw_data:review_count::int as review_count,
-    raw_data:is_open::boolean as is_open,
+    raw_data:is_open::int::boolean as is_open,
     raw_data:attributes::variant as attributes,
-    split(raw_data:categories,', ') as categories,
+    split(raw_data:categories::text, ', ') as categories,
     raw_data:hours::variant as hours
 from latest_data

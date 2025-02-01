@@ -7,7 +7,7 @@
 
     {%- else -%}
 
-        {{ generate_database_name_for_env }}
+        {{ generate_database_name_for_env(custom_database_name, node) }}
 
     {%- endif -%}
 

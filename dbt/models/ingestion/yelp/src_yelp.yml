@@ -1,8 +1,9 @@
 version: 2
 
-- name: raw_yelp
-		database: raw
-		schema: yelp
+sources:
+  - name: raw_yelp
+    database: raw
+    schema: yelp
     loader: github_actions # the way the data is loaded into snowflake
     freshness:
       warn_after: {count: 12, period: hour}
@@ -12,14 +13,14 @@ version: 2
         - source_url: "https://www.yelp.com/dataset"
         - source_owner: "Yelp"
     tags: ["yelp", "ingestion", "raw"]
-		tables:
-			- name: business
-				identifier: raw_business
-      - name: checkin
+    tables:
+      - name: business
+        identifier: raw_business
+      - name: checkins
         identifier: raw_checkin
-      - name: review
+      - name: reviews
         identifier: raw_review
-      - name: tip
+      - name: tips
         identifier: raw_tip
-      - name: user
+      - name: users
         identifier: raw_user

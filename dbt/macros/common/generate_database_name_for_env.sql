@@ -2,21 +2,21 @@
 
     {%- set default_database = target.database -%}
 
-    {%- if target.name == 'prod' %-}
+    {%- if target.name == 'prod' -%}
         {%- if custom_database_name is not none -%}
             {{ custom_database_name | trim }}
         {%- else -%}
             {{ default_database }}
         {%- endif -%}
 
-    {%- elif target.name == 'ci' %-}
+    {%- elif target.name == 'ci' -%}
         {%- if custom_database_name is not none -%}
             {{ custom_database_name | trim }}
         {%- else -%}
             {{ default_database }}
         {%- endif -%}
 
-    {%- elif target.name == 'dev' %-}
+    {%- elif target.name == 'dev' -%}
         {{ default_database }}
 
     {%- else -%}

@@ -24,8 +24,8 @@ clean-targets:
 models:
   citypulse:
     ingestion:
+      +materialized: view
+      +database: raw
       yelp:
-        +materialized: view
-        +database: raw
         +schema: yelp
         +query_tag: yelp_ingestion

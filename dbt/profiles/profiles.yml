@@ -4,31 +4,34 @@ citypulse:
   outputs:
     dev:
       type: snowflake
-      account: {{ env_var('SNOWFLAKE_ACCOUNT') }}
-      user: {{ env_var('SNOWFLAKE_USER') }}
-      password: {{ env_var('SNOWFLAKE_PASSWORD') }}
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: dev_role
       warehouse: dev_wh
       database: development
-      schema: {{ env_var('SNOWFLAKE_USER') }}
+      schema: "{{ env_var('SNOWFLAKE_USER') }}"
       threads: 4
       client_session_keep_alive: False
       reuse_connections: True
     ci:
       type: snowflake
-      account: {{ env_var('SNOWFLAKE_ACCOUNT') }}
-      user: {{ env_var('SNOWFLAKE_USER') }}
-      password: {{ env_var('SNOWFLAKE_PASSWORD') }}
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: ci_role
       warehouse: ci_wh
       database: ci
-      schema: {{ env_var('SNOWFLAKE_CI_SCHEMA') }} # generated based on the pr number
+      schema: "{{ env_var('SNOWFLAKE_CI_SCHEMA') }}" # generated based on the pr number
       threads: 4
       client_session_keep_alive: False
       reuse_connections: True
     prod:
       type: snowflake
-      account: {{ env_var('SNOWFLAKE_ACCOUNT') }}
-      user: {{ env_var('SNOWFLAKE_USER') }}
-      password: {{ env_var('SNOWFLAKE_PASSWORD') }}
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: prod_role
       warehouse: ci_wh
       database: production
       schema: public
