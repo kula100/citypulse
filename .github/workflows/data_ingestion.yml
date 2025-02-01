@@ -39,7 +39,7 @@ jobs:
           F1_URL="${RELEASE_URL}${DATASET_FILE_NAME}1.zip"
           F2_URL="${RELEASE_URL}${DATASET_FILE_NAME}2.zip"
           F3_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
-          wget -q-P ${TARGET_DIR} ${F1_URL}
+          wget -q -P ${TARGET_DIR} ${F1_URL}
           wget -q -P ${TARGET_DIR} ${F2_URL}
           wget -q -P ${TARGET_DIR} ${F3_URL}
 
