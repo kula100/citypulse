@@ -36,19 +36,15 @@ jobs:
       - name: Download datasets
         run: |
           RELEASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.version }}/"
-          DOWNLOAD_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
-          wget -P ${TARGET_DIR} ${DOWNLOAD_URL}
-
-      - name: List downloaded files
-        run: |
-          echo "Downloaded files:"
-          ls -l ${TARGET_DIR}
-          pwd
+          F1_URL="${RELEASE_URL}${DATASET_FILE_NAME}1.zip"
+          F2_URL="${RELEASE_URL}${DATASET_FILE_NAME}2.zip"
+          F3_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
+          wget -P ${TARGET_DIR} ${F1_URL}
+          wget -P ${TARGET_DIR} ${F2_URL}
+          wget -P ${TARGET_DIR} ${F3_URL}
 
       - name: Extract datasets
         run: |
-          pwd
-          echo "${TARGET_DIR}/${DATASET_FILE_NAME}3.zip"
           for file in $(ls ${TARGET_DIR}/*.zip); do
             unzip -o -j "$file" -d ${TARGET_DIR}/
           done
@@ -64,9 +60,3 @@ jobs:
           SNOWFLAKE_STAGE: yelp_ingestion_stage
         run: |
           python yelp_data_ingestion.py
-
-# https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}1.zip \
-# https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${DATASET_FILE_NAME}2.zip \
-
-# unzip ${TARGET_DIR}/${DATASET_FILE_NAME}1.zip -d ${TARGET_DIR}
-# unzip ${TARGET_DIR}/${DATASET_FILE_NAME}2.zip -d ${TARGET_DIR}
