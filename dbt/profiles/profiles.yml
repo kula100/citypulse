@@ -32,7 +32,7 @@ citypulse:
       user: "{{ env_var('SNOWFLAKE_USER') }}"
       password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
       role: prod_role
-      warehouse: ci_wh
+      warehouse: prod_wh
       database: production
       schema: public
       threads: 4
