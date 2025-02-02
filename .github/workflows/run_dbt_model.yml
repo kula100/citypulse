@@ -1,0 +1,64 @@
+name: Run a dbt model in prod
+
+on:
+  workflow_dispatch:
+    inputs:
+        selector:
+          description: "FQN of the dbt model to run or selectors"
+          required: true
+        full_refresh:
+          description: "Whether to run the model with full-refresh, default is false"
+          required: false
+          default: "false"
+
+jobs:
+  run-the-dbt-models-in-prod:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      DBT_VERSION: 1.9.2
+      DBT_SNOWFLAKE_VERSION: 1.8.4
+      DBT_PROFILES_DIR: profiles/
+      DBT_TARGET: prod
+
+    defaults:
+      run:
+        working-directory: dbt/
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
+
+      - name: Set up dbt
+        run: |
+          dbt deps
+
+      - name: Test dbt connection
+        run: |
+          dbt debug --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET
+
+      - name: Run dbt models
+        run: |
+          if [ "${{ github.event.inputs.version }}" == "false" ]; then
+            CMD="dbt run --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET --select ${{ github.event.inputs.selector }}"
+          else
+            CMD="dbt run --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET --select ${{ github.event.inputs.selector }} --full-refresh"
+          fi
+          echo "Executing: $CMD"
+          eval $CMD
+
+      - name: Run dbt cleanup
+        run: |
+          dbt clean --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET
