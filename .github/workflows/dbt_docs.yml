@@ -47,12 +47,8 @@ jobs:
       - name: Generate dbt docs
         run: |
           dbt docs generate
-          dbt docs serve --no-browser --port 8080
-          sleep 5
-          pkill -f "dbt docs serve"
 
-      - name: Copy website files to docs folder
-        run: |
-          cp target/manifest.json ./../docs/
-          cp target/catalog.json ./../docs/
-          cp target/index.html ./../docs/
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: target
