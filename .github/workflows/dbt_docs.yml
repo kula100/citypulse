@@ -1,4 +1,4 @@
-name: Deploy dbt Docs website
+name: Publish dbt Docs Website
 
 on:
   push:
@@ -19,7 +19,7 @@ env:
   DBT_TARGET: prod
 
 jobs:
-  deploy-dbt-docs-website:
+  publish-dbt-docs-website:
     runs-on: ubuntu-latest
 
     defaults:
@@ -56,6 +56,7 @@ jobs:
           dbt docs generate
 
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dbt/target
