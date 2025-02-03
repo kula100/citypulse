@@ -54,7 +54,3 @@ jobs:
       - name: Docs Coverage
         run: |
           dbt run-operation required_docs
-
-      - name: Run dbt cleanup
-        run: |
-          dbt clean

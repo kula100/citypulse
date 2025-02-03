@@ -59,7 +59,3 @@ jobs:
           fi
           echo "Executing: $CMD"
           eval $CMD
-
-      - name: Run dbt cleanup
-        run: |
-          dbt clean
