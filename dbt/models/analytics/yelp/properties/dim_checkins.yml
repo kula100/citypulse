@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_checkins
+    description: "{{ doc('dim_checkins') }}"
+    columns: 
+    - name: surrogate_key
+      description: "{{ doc('dim_checkins_surrogate_key') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: business_id
+      description: "{{ doc('dim_checkins_business_id') }}"
+
+    - name: checkin_date
+      description: "{{ doc('dim_checkins_checkin_date') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_checkins_executed_at') }}"

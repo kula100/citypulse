@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_tips
+    description: "{{ doc('dim_tips') }}"
+    columns: 
+    - name: surrogate_key
+      description: "{{ doc('dim_tips_surrogate_key') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: user_id
+      description: "{{ doc('dim_tips_user_id') }}"
+
+    - name: business_id
+      description: "{{ doc('dim_tips_business_id') }}"
+
+    - name: tip_date
+      description: "{{ doc('dim_tips_tip_date') }}"
+
+    - name: tip_msg
+      description: "{{ doc('dim_tips_tip_msg') }}"
+
+    - name: compliment_count
+      description: "{{ doc('dim_tips_compliment_count') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_tips_executed_at') }}"

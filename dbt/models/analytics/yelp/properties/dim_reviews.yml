@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_reviews
+    description: "{{ doc('dim_reviews') }}"
+    columns: 
+    - name: review_id
+      description: "{{ doc('dim_reviews_review_id') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: user_id
+      description: "{{ doc('dim_reviews_user_id') }}"
+
+    - name: business_id
+      description: "{{ doc('dim_reviews_business_id') }}"
+
+    - name: stars
+      description: "{{ doc('dim_reviews_stars') }}"
+
+    - name: review_date
+      description: "{{ doc('dim_reviews_review_date') }}"
+
+    - name: review
+      description: "{{ doc('dim_reviews_review') }}"
+
+    - name: useful_votes
+      description: "{{ doc('dim_reviews_useful_votes') }}"
+
+    - name: funny_votes
+      description: "{{ doc('dim_reviews_funny_votes') }}"
+
+    - name: cool_votes
+      description: "{{ doc('dim_reviews_cool_votes') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_reviews_executed_at') }}"

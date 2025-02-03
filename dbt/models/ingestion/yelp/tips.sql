@@ -9,7 +9,7 @@ with latest_data as (
 select
     raw_data:user_id::text as user_id,
     raw_data:business_id::text as business_id,
-    raw_data:date::date as tip_date,
+    try_to_timestamp(raw_data:date::text) as tip_date,
     raw_data:text::text as tip_msg,
     raw_data:compliment_count::int as compliment_count
 from latest_data

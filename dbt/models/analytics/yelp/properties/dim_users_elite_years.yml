@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_users_elite_years
+    description: "{{ doc('dim_users_elite_years') }}"
+    columns: 
+    - name: surrogate_key
+      description: "{{ doc('dim_users_elite_years_surrogate_key') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: user_id
+      description: "{{ doc('dim_users_elite_years_user_id') }}"
+
+    - name: year
+      description: "{{ doc('dim_users_elite_years_year') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_users_elite_years_executed_at') }}"

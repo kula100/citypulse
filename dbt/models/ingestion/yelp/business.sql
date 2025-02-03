@@ -19,6 +19,6 @@ select
     raw_data:review_count::int as review_count,
     raw_data:is_open::int::boolean as is_open,
     raw_data:attributes::variant as attributes,
-    split(raw_data:categories::text, ', ') as categories,
+    array_distinct(split(raw_data:categories::text, ', ')) as categories,
     raw_data:hours::variant as hours
 from latest_data

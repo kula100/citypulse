@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_business_categories
+    description: "{{ doc('dim_business_categories') }}"
+    columns: 
+    - name: surrogate_key
+      description: "{{ doc('dim_business_categories_surrogate_key') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: business_id
+      description: "{{ doc('dim_business_categories_business_id') }}"
+
+    - name: category
+      description: "{{ doc('dim_business_categories_category') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_business_categories_executed_at') }}"

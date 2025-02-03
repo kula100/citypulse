@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: "{{ doc('dim_users') }}"
+    columns: 
+    - name: user_id
+      description: "{{ doc('dim_users_user_id') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: name
+      description: "{{ doc('dim_users_name') }}"
+
+    - name: review_count
+      description: "{{ doc('dim_users_review_count') }}"
+
+    - name: yelping_since
+      description: "{{ doc('dim_users_yelping_since') }}"
+
+    - name: useful_votes
+      description: "{{ doc('dim_users_useful_votes') }}"
+
+    - name: funny_votes
+      description: "{{ doc('dim_users_funny_votes') }}"
+
+    - name: cool_votes
+      description: "{{ doc('dim_users_cool_votes') }}"
+
+    - name: fans
+      description: "{{ doc('dim_users_fans') }}"
+
+    - name: average_stars
+      description: "{{ doc('dim_users_average_stars') }}"
+
+    - name: compliment_hot
+      description: "{{ doc('dim_users_compliment_hot') }}"
+
+    - name: compliment_more
+      description: "{{ doc('dim_users_compliment_more') }}"
+
+    - name: compliment_profile
+      description: "{{ doc('dim_users_compliment_profile') }}"
+
+    - name: compliment_cute
+      description: "{{ doc('dim_users_compliment_cute') }}"
+
+    - name: compliment_list
+      description: "{{ doc('dim_users_compliment_list') }}"
+
+    - name: compliment_note
+      description: "{{ doc('dim_users_compliment_note') }}"
+
+    - name: compliment_plain
+      description: "{{ doc('dim_users_compliment_plain') }}"
+
+    - name: compliment_cool
+      description: "{{ doc('dim_users_compliment_cool') }}"
+
+    - name: compliment_funny
+      description: "{{ doc('dim_users_compliment_funny') }}"
+
+    - name: compliment_writer
+      description: "{{ doc('dim_users_compliment_writer') }}"
+
+    - name: compliment_photos
+      description: "{{ doc('dim_users_compliment_photos') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_users_executed_at') }}"
