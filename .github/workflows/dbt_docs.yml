@@ -1,0 +1,58 @@
+name: Deploy dbt Docs website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-dbt-docs-website:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      DBT_VERSION: 1.9.2
+      DBT_SNOWFLAKE_VERSION: 1.8.4
+      DBT_PROFILES_DIR: profiles/
+      DBT_TARGET: prod
+
+    defaults:
+      run:
+        working-directory: dbt/
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
+
+      - name: Install dbt dependencies
+        run: |
+          dbt deps
+
+      - name: Compile dbt project
+        run: |
+          dbt compile
+
+      - name: Generate dbt docs
+        run: |
+          dbt docs generate
+          dbt docs serve --no-browser --port 8080
+          sleep 5
+          pkill -f "dbt docs serve"
+
+      - name: Copy website files to docs folder
+        run: |
+          cp target/manifest.json ./../docs/
+          cp target/catalog.json ./../docs/
+          cp target/index.html ./../docs/

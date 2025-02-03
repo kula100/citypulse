@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  dbt_tests_and_docs_coverage:
+  dbt-tests-and-docs-coverage:
     runs-on: ubuntu-latest
 
     env:
