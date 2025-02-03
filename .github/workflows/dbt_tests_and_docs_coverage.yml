@@ -1,0 +1,59 @@
+name: Find data tests and docs coverage
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dbt_tests_and_docs_coverage:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      DBT_VERSION: 1.9.2
+      DBT_SNOWFLAKE_VERSION: 1.8.4
+      DBT_PROFILES_DIR: profiles/
+      DBT_TARGET: prod
+
+    defaults:
+      run:
+        working-directory: dbt/
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
+
+
+      - name: Install dbt dependencies
+        run: |
+          dbt deps
+
+      - name: Compile dbt project
+        run: |
+          dbt compile
+
+      - name: Find out Coverage
+        run: |
+          dbt run-operation required_tests &
+          dbt run-operation required_docs &
+          wait
+
+      - name: Run dbt cleanup
+        run: |
+          dbt clean

@@ -1,0 +1,254 @@
+version: 2
+
+models:
+  - name: dim_business_attributes
+    description: "{{ doc('dim_business_attributes') }}"
+    columns: 
+    - name: business_id
+      description: "{{ doc('dim_business_attributes_business_id') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: restaurantsdelivery
+      description: "{{ doc('dim_business_attributes_restaurantsdelivery') }}"
+
+    - name: drivethru
+      description: "{{ doc('dim_business_attributes_drivethru') }}"
+
+    - name: byobcorkage
+      description: "{{ doc('dim_business_attributes_byobcorkage') }}"
+
+    - name: byob
+      description: "{{ doc('dim_business_attributes_byob') }}"
+
+    - name: coatcheck
+      description: "{{ doc('dim_business_attributes_coatcheck') }}"
+
+    - name: happyhour
+      description: "{{ doc('dim_business_attributes_happyhour') }}"
+
+    - name: hastv
+      description: "{{ doc('dim_business_attributes_hastv') }}"
+
+    - name: restaurantspricerange2
+      description: "{{ doc('dim_business_attributes_restaurantspricerange2') }}"
+
+    - name: restaurantsreservations
+      description: "{{ doc('dim_business_attributes_restaurantsreservations') }}"
+
+    - name: restaurantstakeout
+      description: "{{ doc('dim_business_attributes_restaurantstakeout') }}"
+
+    - name: restaurantsgoodforgroups
+      description: "{{ doc('dim_business_attributes_restaurantsgoodforgroups') }}"
+
+    - name: alcohol
+      description: "{{ doc('dim_business_attributes_alcohol') }}"
+
+    - name: corkage
+      description: "{{ doc('dim_business_attributes_corkage') }}"
+
+    - name: caters
+      description: "{{ doc('dim_business_attributes_caters') }}"
+
+    - name: outdoorseating
+      description: "{{ doc('dim_business_attributes_outdoorseating') }}"
+
+    - name: restaurantsattire
+      description: "{{ doc('dim_business_attributes_restaurantsattire') }}"
+
+    - name: restaurantstableservice
+      description: "{{ doc('dim_business_attributes_restaurantstableservice') }}"
+
+    - name: restaurantscounterservice
+      description: "{{ doc('dim_business_attributes_restaurantscounterservice') }}"
+
+    - name: goodfordancing
+      description: "{{ doc('dim_business_attributes_goodfordancing') }}"
+
+    - name: dogsallowed
+      description: "{{ doc('dim_business_attributes_dogsallowed') }}"
+
+    - name: agesallowed
+      description: "{{ doc('dim_business_attributes_agesallowed') }}"
+
+    - name: goodforkids
+      description: "{{ doc('dim_business_attributes_goodforkids') }}"
+
+    - name: amb_casual
+      description: "{{ doc('dim_business_attributes_amb_casual') }}"
+
+    - name: amb_classy
+      description: "{{ doc('dim_business_attributes_amb_classy') }}"
+
+    - name: amb_divey
+      description: "{{ doc('dim_business_attributes_amb_divey') }}"
+
+    - name: amb_hipster
+      description: "{{ doc('dim_business_attributes_amb_hipster') }}"
+
+    - name: amb_intimate
+      description: "{{ doc('dim_business_attributes_amb_intimate') }}"
+
+    - name: amb_romantic
+      description: "{{ doc('dim_business_attributes_amb_romantic') }}"
+
+    - name: amb_touristy
+      description: "{{ doc('dim_business_attributes_amb_touristy') }}"
+
+    - name: amb_trendy
+      description: "{{ doc('dim_business_attributes_amb_trendy') }}"
+
+    - name: amb_upscale
+      description: "{{ doc('dim_business_attributes_amb_upscale') }}"
+
+    - name: music_background_music
+      description: "{{ doc('dim_business_attributes_music_background_music') }}"
+
+    - name: music_dj
+      description: "{{ doc('dim_business_attributes_music_dj') }}"
+
+    - name: music_jukebox
+      description: "{{ doc('dim_business_attributes_music_jukebox') }}"
+
+    - name: music_karaoke
+      description: "{{ doc('dim_business_attributes_music_karaoke') }}"
+
+    - name: music_live
+      description: "{{ doc('dim_business_attributes_music_live') }}"
+
+    - name: music_video
+      description: "{{ doc('dim_business_attributes_music_video') }}"
+
+    - name: business_parking_garage
+      description: "{{ doc('dim_business_attributes_business_parking_garage') }}"
+
+    - name: business_parking_street
+      description: "{{ doc('dim_business_attributes_business_parking_street') }}"
+
+    - name: business_parking_validated
+      description: "{{ doc('dim_business_attributes_business_parking_validated') }}"
+
+    - name: business_parking_lot
+      description: "{{ doc('dim_business_attributes_business_parking_lot') }}"
+
+    - name: business_parking_valet
+      description: "{{ doc('dim_business_attributes_business_parking_valet') }}"
+
+    - name: bike_parking
+      description: "{{ doc('dim_business_attributes_bike_parking') }}"
+
+    - name: wheelchair_accessible
+      description: "{{ doc('dim_business_attributes_wheelchair_accessible') }}"
+
+    - name: bestnights_friday
+      description: "{{ doc('dim_business_attributes_bestnights_friday') }}"
+
+    - name: bestnights_monday
+      description: "{{ doc('dim_business_attributes_bestnights_monday') }}"
+
+    - name: bestnights_saturday
+      description: "{{ doc('dim_business_attributes_bestnights_saturday') }}"
+
+    - name: bestnights_sunday
+      description: "{{ doc('dim_business_attributes_bestnights_sunday') }}"
+
+    - name: bestnights_thursday
+      description: "{{ doc('dim_business_attributes_bestnights_thursday') }}"
+
+    - name: bestnights_tuesday
+      description: "{{ doc('dim_business_attributes_bestnights_tuesday') }}"
+
+    - name: bestnights_wednesday
+      description: "{{ doc('dim_business_attributes_bestnights_wednesday') }}"
+
+    - name: noiselevel
+      description: "{{ doc('dim_business_attributes_noiselevel') }}"
+
+    - name: byappointmentonly
+      description: "{{ doc('dim_business_attributes_byappointmentonly') }}"
+
+    - name: wifi
+      description: "{{ doc('dim_business_attributes_wifi') }}"
+
+    - name: smoking
+      description: "{{ doc('dim_business_attributes_smoking') }}"
+
+    - name: open24hours
+      description: "{{ doc('dim_business_attributes_open24hours') }}"
+
+    - name: goodformeal_dessert
+      description: "{{ doc('dim_business_attributes_goodformeal_dessert') }}"
+
+    - name: goodformeal_latenight
+      description: "{{ doc('dim_business_attributes_goodformeal_latenight') }}"
+
+    - name: goodformeal_lunch
+      description: "{{ doc('dim_business_attributes_goodformeal_lunch') }}"
+
+    - name: goodformeal_dinner
+      description: "{{ doc('dim_business_attributes_goodformeal_dinner') }}"
+
+    - name: goodformeal_brunch
+      description: "{{ doc('dim_business_attributes_goodformeal_brunch') }}"
+
+    - name: goodformeal_breakfast
+      description: "{{ doc('dim_business_attributes_goodformeal_breakfast') }}"
+
+    - name: acceptsinsurance
+      description: "{{ doc('dim_business_attributes_acceptsinsurance') }}"
+
+    - name: businessacceptscreditcards
+      description: "{{ doc('dim_business_attributes_businessacceptscreditcards') }}"
+
+    - name: businessacceptsbitcoin
+      description: "{{ doc('dim_business_attributes_businessacceptsbitcoin') }}"
+
+    - name: diet_dairy_free
+      description: "{{ doc('dim_business_attributes_diet_dairy_free') }}"
+
+    - name: diet_gluten_free
+      description: "{{ doc('dim_business_attributes_diet_gluten_free') }}"
+
+    - name: diet_vegan
+      description: "{{ doc('dim_business_attributes_diet_vegan') }}"
+
+    - name: diet_kosher
+      description: "{{ doc('dim_business_attributes_diet_kosher') }}"
+
+    - name: diet_halal
+      description: "{{ doc('dim_business_attributes_diet_halal') }}"
+
+    - name: diet_soy_free
+      description: "{{ doc('dim_business_attributes_diet_soy_free') }}"
+
+    - name: diet_vegetarian
+      description: "{{ doc('dim_business_attributes_diet_vegetarian') }}"
+
+    - name: hair_coloring
+      description: "{{ doc('dim_business_attributes_hair_coloring') }}"
+
+    - name: hair_extensions
+      description: "{{ doc('dim_business_attributes_hair_extensions') }}"
+
+    - name: hair_perms
+      description: "{{ doc('dim_business_attributes_hair_perms') }}"
+
+    - name: hair_straightperms
+      description: "{{ doc('dim_business_attributes_hair_straightperms') }}"
+
+    - name: hair_africanamerican
+      description: "{{ doc('dim_business_attributes_hair_africanamerican') }}"
+
+    - name: hair_asian
+      description: "{{ doc('dim_business_attributes_hair_asian') }}"
+
+    - name: hair_curly
+      description: "{{ doc('dim_business_attributes_hair_curly') }}"
+
+    - name: hair_kids
+      description: "{{ doc('dim_business_attributes_hair_kids') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_business_attributes_executed_at') }}"

@@ -29,3 +29,9 @@ models:
       yelp:
         +schema: yelp
         +query_tag: yelp_ingestion
+    analytics:
+      yelp:
+        marts:
+          +required_docs: true
+          +required_tests:
+            "unique.*": 1

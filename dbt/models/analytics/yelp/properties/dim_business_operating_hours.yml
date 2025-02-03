@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_business_operating_hours
+    description: "{{ doc('dim_business_operating_hours') }}"
+    columns: 
+    - name: business_id
+      description: "{{ doc('dim_business_operating_hours_business_id') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: monday_open
+      description: "{{ doc('dim_business_operating_hours_monday_open') }}"
+
+    - name: monday_close
+      description: "{{ doc('dim_business_operating_hours_monday_close') }}"
+
+    - name: tuesday_open
+      description: "{{ doc('dim_business_operating_hours_tuesday_open') }}"
+
+    - name: tuesday_close
+      description: "{{ doc('dim_business_operating_hours_tuesday_close') }}"
+
+    - name: wednesday_open
+      description: "{{ doc('dim_business_operating_hours_wednesday_open') }}"
+
+    - name: wednesday_close
+      description: "{{ doc('dim_business_operating_hours_wednesday_close') }}"
+
+    - name: thursday_open
+      description: "{{ doc('dim_business_operating_hours_thursday_open') }}"
+
+    - name: thursday_close
+      description: "{{ doc('dim_business_operating_hours_thursday_close') }}"
+
+    - name: friday_open
+      description: "{{ doc('dim_business_operating_hours_friday_open') }}"
+
+    - name: friday_close
+      description: "{{ doc('dim_business_operating_hours_friday_close') }}"
+
+    - name: saturday_open
+      description: "{{ doc('dim_business_operating_hours_saturday_open') }}"
+
+    - name: saturday_close
+      description: "{{ doc('dim_business_operating_hours_saturday_close') }}"
+
+    - name: sunday_open
+      description: "{{ doc('dim_business_operating_hours_sunday_open') }}"
+
+    - name: sunday_close
+      description: "{{ doc('dim_business_operating_hours_sunday_close') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_business_operating_hours_executed_at') }}"

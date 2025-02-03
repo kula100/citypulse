@@ -6,9 +6,9 @@
 
 select
     rst.business_id,
-    rst.restaurantsdelivery::boolean as restaurantsdelivery,
-    rst.drivethru::boolean as drivethru,
-    rst.byobcorkage as byobcorkage,
+    rst.restaurantsdelivery,
+    rst.drivethru,
+    rst.byobcorkage,
     rst.byob,
     rst.coatcheck,
     rst.happyhour,

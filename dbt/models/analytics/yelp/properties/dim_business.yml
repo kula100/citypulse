@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_business
+    description: "{{ doc('dim_business') }}"
+    columns: 
+    - name: business_id
+      description: "{{ doc('dim_business_business_id') }}"
+      data_tests:
+        - unique
+        - not_null
+
+    - name: name
+      description: "{{ doc('dim_business_name') }}"
+
+    - name: address
+      description: "{{ doc('dim_business_address') }}"
+
+    - name: city
+      description: "{{ doc('dim_business_city') }}"
+
+    - name: state
+      description: "{{ doc('dim_business_state') }}"
+
+    - name: postal_code
+      description: "{{ doc('dim_business_postal_code') }}"
+
+    - name: latitude
+      description: "{{ doc('dim_business_latitude') }}"
+
+    - name: longitude
+      description: "{{ doc('dim_business_longitude') }}"
+
+    - name: stars
+      description: "{{ doc('dim_business_stars') }}"
+
+    - name: review_count
+      description: "{{ doc('dim_business_review_count') }}"
+
+    - name: is_open
+      description: "{{ doc('dim_business_is_open') }}"
+
+    - name: executed_at
+      description: "{{ doc('dim_business_executed_at') }}"

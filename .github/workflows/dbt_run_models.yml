@@ -1,4 +1,4 @@
-name: Run a dbt model in prod
+name: Run dbt models in prod on demand
 
 on:
   workflow_dispatch:
@@ -53,13 +53,13 @@ jobs:
       - name: Run dbt models
         run: |
           if [ "${{ github.event.inputs.version }}" == "false" ]; then
-            CMD="dbt run --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET --select ${{ github.event.inputs.selector }}"
+            CMD="dbt run --select ${{ github.event.inputs.selector }}"
           else
-            CMD="dbt run --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET --select ${{ github.event.inputs.selector }} --full-refresh"
+            CMD="dbt run --select ${{ github.event.inputs.selector }} --full-refresh"
           fi
           echo "Executing: $CMD"
           eval $CMD
 
       - name: Run dbt cleanup
         run: |
-          dbt clean --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET
+          dbt clean
