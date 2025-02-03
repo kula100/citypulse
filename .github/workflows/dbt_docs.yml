@@ -5,24 +5,31 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
+env:
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+  DBT_VERSION: 1.9.2
+  DBT_SNOWFLAKE_VERSION: 1.8.4
+  DBT_PROFILES_DIR: profiles/
+  DBT_TARGET: prod
+
 jobs:
   deploy-dbt-docs-website:
     runs-on: ubuntu-latest
 
-    env:
-      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-      DBT_VERSION: 1.9.2
-      DBT_SNOWFLAKE_VERSION: 1.8.4
-      DBT_PROFILES_DIR: profiles/
-      DBT_TARGET: prod
-
     defaults:
       run:
         working-directory: dbt/
-    
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
