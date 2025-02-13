@@ -4,6 +4,7 @@ sources:
   - name: raw_yelp
     database: raw
     schema: yelp
+    description: "{{ doc('src_raw_yelp') }}"
     loader: github_actions # the way the data is loaded into snowflake
     freshness:
       warn_after: {count: 12, period: hour}
@@ -16,11 +17,16 @@ sources:
     tables:
       - name: business
         identifier: raw_business
+        description: "{{ doc('src_raw_yelp_business') }}"
       - name: checkins
         identifier: raw_checkin
+        description: "{{ doc('src_raw_yelp_checkin') }}"
       - name: reviews
         identifier: raw_review
+        description: "{{ doc('src_raw_yelp_review') }}"
       - name: tips
         identifier: raw_tip
+        description: "{{ doc('src_raw_yelp_tip') }}"
       - name: users
         identifier: raw_user
+        description: "{{ doc('src_raw_yelp_user') }}"
