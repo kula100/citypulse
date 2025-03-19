@@ -1,0 +1,31 @@
+gateways:
+  snowflake:
+    connection:
+      # For more information on configuring the connection to your execution engine, visit:
+      # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connections
+      # https://sqlmesh.readthedocs.io/en/stable/integrations/engines/snowflake/#connection-options
+      type: snowflake
+      account: 
+      # concurrent_tasks: 4
+      # register_comments: True
+      # pre_ping: False
+      # pretty_sql: False
+      # user: 
+      # password: 
+      # warehouse: 
+      # database: 
+      # role: 
+      # authenticator: 
+      # token: 
+      # application: Tobiko_SQLMesh
+      # private_key: 
+      # private_key_path: 
+      # private_key_passphrase: 
+      # session_parameters: 
+
+
+default_gateway: snowflake
+
+model_defaults:
+  dialect: snowflake
+  start: 2025-03-18
