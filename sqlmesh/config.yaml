@@ -25,11 +25,22 @@ gateways:
       pre_ping: False
       pretty_sql: False
     state_connection:
-      type: duckdb
-      database: sf_state.db
-
+      type: postgres
+      host: {{ env_var('SUPABASE_HOST') }}
+      user: {{ env_var('SUPABASE_USER') }}
+      password: {{ env_var('SUPABASE_PASSWORD') }}
+      port: {{ env_var('SUPABASE_PORT') }}
+      database: {{ env_var('SUPABASE_DB') }}
 
 default_gateway: sfprod
+
+default_target_environment: {{ env_var('SNOWFLAKE_USER') }}_dev
+environment_catalog_mapping:
+  {{ env_var('SNOWFLAKE_USER') }}_dev: development
+  prod: production
+environment_suffix_target: table
+# physical_schema_mapping:
+#   '.*': {{ env_var('SNOWFLAKE_USER') }}
 
 model_defaults:
   dialect: snowflake

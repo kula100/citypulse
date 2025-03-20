@@ -11,6 +11,7 @@ MODEL (
 SELECT
   id,
   item_id,
+  'z' as custom_col,
   event_date,
 FROM
   sqlmesh_example.seed_model
