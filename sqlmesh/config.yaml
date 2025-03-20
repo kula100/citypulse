@@ -1,20 +1,18 @@
+disable_anonymized_analytics: False
+
 gateways:
-  snowflake:
+  sfprod:
     connection:
       # For more information on configuring the connection to your execution engine, visit:
       # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connections
       # https://sqlmesh.readthedocs.io/en/stable/integrations/engines/snowflake/#connection-options
       type: snowflake
-      account: 
-      # concurrent_tasks: 4
-      # register_comments: True
-      # pre_ping: False
-      # pretty_sql: False
-      # user: 
-      # password: 
-      # warehouse: 
-      # database: 
-      # role: 
+      account: {{ env_var('SNOWFLAKE_ACCOUNT') }}
+      user: {{ env_var('SNOWFLAKE_USER') }}
+      password: {{ env_var('SNOWFLAKE_PASSWORD') }}
+      warehouse: {{ env_var('SNOWFLAKE_WAREHOUSE') }}
+      database: demo_sqlmesh
+      role: accountadmin
       # authenticator: 
       # token: 
       # application: Tobiko_SQLMesh
@@ -22,9 +20,16 @@ gateways:
       # private_key_path: 
       # private_key_passphrase: 
       # session_parameters: 
+      concurrent_tasks: 4
+      register_comments: True
+      pre_ping: False
+      pretty_sql: False
+    state_connection:
+      type: duckdb
+      database: sf_state.db
 
 
-default_gateway: snowflake
+default_gateway: sfprod
 
 model_defaults:
   dialect: snowflake
