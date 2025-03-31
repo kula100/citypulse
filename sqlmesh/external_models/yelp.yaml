@@ -1,0 +1,30 @@
+- name: raw.yelp.raw_business
+  description: Raw business data from Yelp
+  columns:
+    raw_data: variant
+    ingestion_datetime: timestampntz(9)
+  gateway: snowflake
+- name: raw.yelp.raw_checkin
+  description: Raw checkin data from Yelp
+  columns:
+    raw_data: variant
+    ingestion_datetime: timestampntz(9)
+  gateway: snowflake
+- name: raw.yelp.raw_review
+  description: Raw review data from Yelp
+  columns:
+    raw_data: variant
+    ingestion_datetime: timestampntz(9)
+  gateway: snowflake
+- name: raw.yelp.raw_tip
+  description: Raw tip data from Yelp
+  columns:
+    raw_data: variant
+    ingestion_datetime: timestampntz(9)
+  gateway: snowflake
+- name: raw.yelp.raw_user
+  description: Raw user data from Yelp
+  columns:
+    raw_data: variant
+    ingestion_datetime: timestampntz(9)
+  gateway: snowflake

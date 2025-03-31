@@ -1,7 +1,7 @@
 disable_anonymized_analytics: False
 
 gateways:
-  sfprod:
+  snowflake:
     connection:
       # For more information on configuring the connection to your execution engine, visit:
       # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connections
@@ -13,7 +13,7 @@ gateways:
       warehouse: {{ env_var('SNOWFLAKE_WAREHOUSE') }}
       database: sqlmesh
       role: accountadmin
-      application: Tobiko_SQLMesh
+      # application: Tobiko_SQLMesh
       # authenticator: 
       # token: 
       # private_key: 
@@ -32,7 +32,7 @@ gateways:
       port: {{ env_var('SUPABASE_PORT') | int }}
       database: {{ env_var('SUPABASE_DB') }}
 
-default_gateway: sfprod
+default_gateway: snowflake
 
 default_target_environment: {{ env_var('SNOWFLAKE_USER') }}
 environment_catalog_mapping:
