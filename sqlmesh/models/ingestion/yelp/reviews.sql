@@ -1,5 +1,5 @@
 MODEL (
-    name raw_yelp.reviews,
+    name raw_yelp.view_reviews,
     kind VIEW,
     grain review_id,
 );

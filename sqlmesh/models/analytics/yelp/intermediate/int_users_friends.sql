@@ -6,5 +6,5 @@ MODEL (
 select
     user_id,
     f.value::text as friend_id
-from raw_yelp.users,
+from raw_yelp.view_users,
 lateral flatten(input => friends) as f

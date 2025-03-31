@@ -1,5 +1,5 @@
 MODEL (
-    name raw_yelp.tips,
+    name raw_yelp.view_tips,
     kind VIEW,
 );
 

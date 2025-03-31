@@ -1,5 +1,5 @@
 MODEL (
-    name raw_yelp.users,
+    name raw_yelp.view_users,
     kind VIEW,
     grain user_id,
 );

@@ -14,4 +14,4 @@ select
     useful_votes,
     funny_votes,
     cool_votes,
-from raw_yelp.reviews
+from raw_yelp.view_reviews

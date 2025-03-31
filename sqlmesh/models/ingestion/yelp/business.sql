@@ -1,5 +1,5 @@
 MODEL (
-    name raw_yelp.business,
+    name raw_yelp.view_business,
     kind VIEW,
     grain business_id,
 );

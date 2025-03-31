@@ -25,4 +25,4 @@ select
     compliment_funny,
     compliment_writer,
     compliment_photos,
-from raw_yelp.users
+from raw_yelp.view_users

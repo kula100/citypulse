@@ -1,5 +1,5 @@
 MODEL (
-    name raw_yelp.checkins,
+    name raw_yelp.view_checkins,
     kind VIEW,
 );
 

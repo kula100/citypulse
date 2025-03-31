@@ -7,7 +7,7 @@ with flattened as (
     select
         user_id,
         try_to_numeric(f.value::text) as elite_year
-    from raw_yelp.users,
+    from raw_yelp.view_users,
     lateral flatten(input => elite_years) as f
 )
 
