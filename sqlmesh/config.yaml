@@ -11,11 +11,11 @@ gateways:
       user: {{ env_var('SNOWFLAKE_USER') }}
       password: {{ env_var('SNOWFLAKE_PASSWORD') }}
       warehouse: {{ env_var('SNOWFLAKE_WAREHOUSE') }}
-      database: demo_sqlmesh
+      database: sqlmesh
       role: accountadmin
+      application: Tobiko_SQLMesh
       # authenticator: 
       # token: 
-      # application: Tobiko_SQLMesh
       # private_key: 
       # private_key_path: 
       # private_key_passphrase: 
@@ -34,13 +34,13 @@ gateways:
 
 default_gateway: sfprod
 
-default_target_environment: {{ env_var('SNOWFLAKE_USER') }}_dev
+default_target_environment: {{ env_var('SNOWFLAKE_USER') }}
 environment_catalog_mapping:
-  {{ env_var('SNOWFLAKE_USER') }}_dev: development
+  {{ env_var('SNOWFLAKE_USER') }}: development
   prod: production
-environment_suffix_target: table
+# environment_suffix_target: table
 # physical_schema_mapping:
-#   '.*': {{ env_var('SNOWFLAKE_USER') }}
+#   '.*': '@schema'
 
 model_defaults:
   dialect: snowflake
