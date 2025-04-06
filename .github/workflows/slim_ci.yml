@@ -38,7 +38,6 @@ jobs:
       - name: Install Requirements
         run: |
           pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
-          &&
           pip install supabase
 
       - name: Set up dbt
