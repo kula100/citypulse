@@ -9,9 +9,12 @@ artifacts = ["manifest.json",]
 bucket = "dbt-artifacts"
 project = "citypulse"
 version = "latest"
+target_dir = os.path.join("..", "..", "dbt", "target")
 
 for artifact in artifacts:
-    path = f"../../dbt/target/{artifact}"
+    path = os.path.join(target_dir, artifact)
     storage_path = f"{project}/{version}/{artifact}"
+    print(f"ℹ Uploading {storage_path} to Supabase...")
     with open(path, "rb") as f:
         supabase.storage.from_(bucket).upload(storage_path, f, {"upsert": True})
+    print(f"✅ Uploaded {artifact}")
