@@ -51,7 +51,7 @@ jobs:
       - name: Download prod manifest
         run: |
           mkdir -p ${DBT_ARTIFACT_DIR}
-          python .github/scripts/download_artifacts.py
+          python ../dags/dbt_artifacts/download_artifacts.py
 
       - name: List modified models
         run: |
