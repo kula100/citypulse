@@ -1,4 +1,4 @@
-name: dbt Slim CD
+name: dbt - Slim CD
 
 on:
   push:

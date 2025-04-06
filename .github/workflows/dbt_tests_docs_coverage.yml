@@ -1,4 +1,4 @@
-name: Data Tests and Docs Coverage
+name: dbt - Data Tests and Docs Coverage
 
 on:
   push:

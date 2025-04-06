@@ -20,3 +20,4 @@ for artifact in artifacts:
     path = os.path.join(target_dir, artifact)
     with open(path, "wb") as f:
         f.write(res)
+        print(f"✅ Downloaded {artifact} to {path}")

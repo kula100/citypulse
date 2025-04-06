@@ -1,4 +1,4 @@
-name: Run dbt models in prod on demand
+name: dbt - Run models in Prod
 
 on:
   workflow_dispatch:
