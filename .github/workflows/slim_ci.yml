@@ -1,0 +1,63 @@
+name: dbt Slim CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  slim-ci:
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+      DBT_VERSION: 1.9.2
+      DBT_SNOWFLAKE_VERSION: 1.8.4
+      DBT_PROFILES_DIR: profiles/
+      DBT_TARGET: ci
+      DBT_ARTIFACT_DIR: target-deferred
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+
+    defaults:
+      run:
+        working-directory: dbt/
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Requirements
+        run: |
+          pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
+          &&
+          pip install supabase
+
+      - name: Set up dbt
+        run: |
+          dbt deps
+
+      - name: Test dbt connection
+        run: |
+          dbt debug
+
+      - name: Download prod manifest
+        run: |
+          mkdir -p ${DBT_ARTIFACT_DIR}
+          python ../dags/dbt_artifacts/download_artifacts.py
+
+      - name: List modified models
+        run: |
+          dbt list --select state:modified+ --state ${DBT_ARTIFACT_DIR}
+
+      - name: Build modified models
+        run: |
+          dbt build --select state:modified+ --state ${DBT_ARTIFACT_DIR}

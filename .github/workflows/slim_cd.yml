@@ -1,18 +1,12 @@
-name: Run dbt models in prod on demand
+name: dbt Slim CD
 
 on:
-  workflow_dispatch:
-    inputs:
-        selector:
-          description: "FQN of the dbt model to run or selectors"
-          required: true
-        full_refresh:
-          description: "Whether to run the model with full-refresh, default is false"
-          required: false
-          default: "false"
+  push:
+    branches:
+      - main
 
 jobs:
-  run-the-dbt-models-in-prod:
+  slim-cd:
     runs-on: ubuntu-latest
 
     env:
@@ -24,6 +18,9 @@ jobs:
       DBT_SNOWFLAKE_VERSION: 1.8.4
       DBT_PROFILES_DIR: profiles/
       DBT_TARGET: prod
+      DBT_ARTIFACT_DIR: target-deferred
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
 
     defaults:
       run:
@@ -38,9 +35,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dbt
+      - name: Install Requirements
         run: |
           pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
+          &&
+          pip install supabase
 
       - name: Set up dbt
         run: |
@@ -48,17 +47,20 @@ jobs:
 
       - name: Test dbt connection
         run: |
-          dbt debug --profiles-dir $DBT_PROFILES_DIR --target $DBT_TARGET
+          dbt debug
 
-      - name: Run dbt models
+      - name: Download prod manifest
         run: |
-          if [ "${{ github.event.inputs.version }}" == "false" ]; then
-            CMD="dbt run --select ${{ github.event.inputs.selector }}"
-          else
-            CMD="dbt run --select ${{ github.event.inputs.selector }} --full-refresh"
-          fi
-          echo "Executing: $CMD"
-          eval $CMD
+          mkdir -p ${DBT_ARTIFACT_DIR}
+          python .github/scripts/download_artifacts.py
+
+      - name: List modified models
+        run: |
+          dbt list --select state:modified+ --state ${DBT_ARTIFACT_DIR}
+
+      - name: Build modified models
+        run: |
+          dbt build --select state:modified+ --state ${DBT_ARTIFACT_DIR}
 
       - name: Upload artifacts
         run: |
