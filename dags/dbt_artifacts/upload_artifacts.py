@@ -18,5 +18,5 @@ for artifact in artifacts:
     storage_path = f"{project}/{version}/{artifact}"
     print(f"ℹ Uploading {storage_path} to Supabase...")
     with open(path, "rb") as f:
-        supabase.storage.from_(bucket).upload(storage_path, f, {"upsert": True})
+        supabase.storage.from_(bucket).upload(storage_path, f, {"upsert": "true"})
     print(f"✅ Uploaded {artifact}")
