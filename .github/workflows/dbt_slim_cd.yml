@@ -48,7 +48,7 @@ jobs:
         run: |
           dbt debug
 
-      - name: Download prod manifest
+      - name: Download Prod manifest
         run: |
           mkdir -p ${DBT_ARTIFACT_DIR}
           python ../dags/dbt_artifacts/download_artifacts.py
@@ -61,6 +61,6 @@ jobs:
         run: |
           dbt build --select state:modified+ --state ${DBT_ARTIFACT_DIR}
 
-      - name: Upload artifacts
+      - name: Upload updated Prod manifest
         run: |
           python ../dags/dbt_artifacts/upload_artifacts.py

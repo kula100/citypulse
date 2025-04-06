@@ -48,7 +48,7 @@ jobs:
         run: |
           dbt debug
 
-      - name: Download prod manifest
+      - name: Download Prod manifest
         run: |
           mkdir -p ${DBT_ARTIFACT_DIR}
           python ../dags/dbt_artifacts/download_artifacts.py
