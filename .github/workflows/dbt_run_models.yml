@@ -24,6 +24,8 @@ jobs:
       DBT_SNOWFLAKE_VERSION: 1.8.4
       DBT_PROFILES_DIR: profiles/
       DBT_TARGET: prod
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
     defaults:
       run:
