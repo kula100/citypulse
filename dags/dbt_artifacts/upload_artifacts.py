@@ -9,7 +9,7 @@ artifacts = ["manifest.json",]
 bucket = "dbt-artifacts"
 project = "citypulse"
 version = "latest"
-target_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "target"))
+target_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "dbt", "target"))
 print(f"Looking for artifacts in: {target_dir}")
 
 
