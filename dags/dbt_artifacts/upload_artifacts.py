@@ -9,7 +9,7 @@ artifacts = ["manifest.json",]
 bucket = "dbt-artifacts"
 project = "citypulse"
 version = "latest"
-target_dir = os.path.join("..", "..", "dbt", "target")
+target_dir = os.path.join("..", "..", "target")
 
 for artifact in artifacts:
     path = os.path.join(target_dir, artifact)
