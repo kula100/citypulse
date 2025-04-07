@@ -16,3 +16,5 @@ select
     cool_votes,
     {{ executed_at() }}
 from {{ ref('reviews') }}
+
+{{ limit_records(1000) }}

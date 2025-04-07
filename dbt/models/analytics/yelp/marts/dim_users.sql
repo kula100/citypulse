@@ -27,3 +27,5 @@ select
     compliment_photos,
     {{ executed_at () }}
 from {{ ref('users')}}
+
+{{ limit_records(1000) }}

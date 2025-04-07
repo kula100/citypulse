@@ -1,4 +1,3 @@
--- pivot
 {{
     config(
         materialized='table'
