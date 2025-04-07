@@ -1,15 +1,12 @@
-name: dbt - Data Tests and Docs Coverage
+name: dbt - CI Cleaner
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:pull_request:
+    types:
+      - closed
 
 jobs:
-  dbt-tests-and-docs-coverage:
+  ci-cleaner:
     runs-on: ubuntu-latest
 
     env:
@@ -20,7 +17,7 @@ jobs:
       DBT_VERSION: 1.9.2
       DBT_SNOWFLAKE_VERSION: 1.8.4
       DBT_PROFILES_DIR: profiles/
-      DBT_TARGET: prod
+      DBT_TARGET: ci
 
     defaults:
       run:
@@ -28,29 +25,25 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.12'
 
-      - name: Install dbt
+      - name: Install Requirements
         run: |
           pip install dbt-core==${DBT_VERSION} dbt-snowflake==${DBT_SNOWFLAKE_VERSION}
 
-      - name: Install dbt dependencies
+      - name: Set up dbt
         run: |
           dbt deps
 
-      - name: Compile dbt project
+      - name: Test dbt connection
         run: |
-          dbt compile
+          dbt debug
 
-      - name: Data Tests Coverage
+      - name: Drop PR Schemas
         run: |
-          dbt run-operation required_tests
-
-      - name: Docs Coverage
-        run: |
-          dbt run-operation required_docs
+          dbt run-operation drop_pr_schemas --args "{pr_number: ${{ github.event.pull_request.number }}"

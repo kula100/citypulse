@@ -61,6 +61,14 @@ jobs:
         run: |
           dbt build --select state:modified+ --state ${DBT_ARTIFACT_DIR}
 
+      - name: Data Tests Coverage
+        run: |
+          dbt run-operation required_tests
+
+      - name: Docs Coverage
+        run: |
+          dbt run-operation required_docs
+
       - name: Upload updated Prod manifest
         run: |
           python ../dags/dbt_artifacts/upload_artifacts.py

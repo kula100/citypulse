@@ -23,7 +23,7 @@ citypulse:
       warehouse: ci_wh
       database: ci
       schema: "{{ env_var('SNOWFLAKE_CI_SCHEMA') }}" # generated based on the pr number
-      threads: 4
+      threads: 8
       client_session_keep_alive: False
       reuse_connections: True
     prod:
@@ -35,6 +35,6 @@ citypulse:
       warehouse: prod_wh
       database: production
       schema: public
-      threads: 4
+      threads: 8
       client_session_keep_alive: False
       reuse_connections: True
