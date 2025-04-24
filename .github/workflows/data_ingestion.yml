@@ -42,10 +42,8 @@ jobs:
       - name: Download file from S3
         run: |
           aws s3 cp s3://yelpdatasetashokkumart/ ${TARGET_DIR}
-        run: |
-            aws s3 ls ${TARGET_DIR}
-        run: |
-            aws s3 ls s3://yelpdatasetashokkumart/
+          aws s3 ls ${TARGET_DIR}
+          aws s3 ls s3://yelpdatasetashokkumart/
 
 
 
