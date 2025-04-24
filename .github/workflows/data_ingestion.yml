@@ -53,8 +53,9 @@ jobs:
             flags: --recursive
 
       - name: Setting the current directory
-        run: |
-            working-directory: dataset
+        defaults:
+            run: |
+                working-directory: dataset
       - name: Extract datasets
         run: |
             unzip *.zip
