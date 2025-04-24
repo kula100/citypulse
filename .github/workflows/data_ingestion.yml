@@ -41,7 +41,7 @@ jobs:
 
       - name: Download file from S3
         run: |
-          aws s3 cp s3://yelpdatasetashokkumart.s3.us-east-1.amazonaws.com/* ${TARGET_DIR}
+          aws s3 cp s3://yelpdatasetashokkumart/ ${TARGET_DIR}
 
 
       - name: Extract datasets
