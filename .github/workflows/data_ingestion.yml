@@ -43,6 +43,7 @@ jobs:
         run: |
           aws configure list
           aws s3 cp s3://yelpdatasetashokkumart/ ${TARGET_DIR}
+          ls ${TARGET_DIR}/
 
 
 
