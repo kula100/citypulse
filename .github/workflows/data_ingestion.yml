@@ -54,7 +54,7 @@ jobs:
 
       - name: Setting the current directory
         run: |
-            working-directory: ${TARGET_DIR}
+            working-directory: dataset
       - name: Extract datasets
         run: |
             unzip *.zip
