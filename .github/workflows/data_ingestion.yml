@@ -54,11 +54,11 @@ jobs:
 
       - name: Setting the current directory
         defaults:
+            run:
                 working-directory: dataset
       - name: Extract datasets
         run: |
             unzip *.zip
-
 
 
 
