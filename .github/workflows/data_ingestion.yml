@@ -35,8 +35,7 @@ jobs:
 
       - name: Download datasets
         run: |
-          #RELEASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.version }}/"
-          RELEASE_URL="https://drive.google.com/drive/folders/1yXM2w4AoK-sh9VowEBziCs8Ri16TbFl1?usp=sharing"
+          RELEASE_URL="https://yelpdatasetashokkumart.s3.us-east-1.amazonaws.com/"
           F1_URL="${RELEASE_URL}${DATASET_FILE_NAME}1.zip"
           F2_URL="${RELEASE_URL}${DATASET_FILE_NAME}2.zip"
           F3_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
