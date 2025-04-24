@@ -54,7 +54,7 @@ jobs:
 
       - name: Extract datasets
         run: |
-          unzip *.zip
+          unzip ${TARGET_DIR}/*.zip
 
       - name: Upload to Snowflake tables
         env:
