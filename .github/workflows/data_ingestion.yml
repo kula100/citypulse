@@ -54,7 +54,11 @@ jobs:
 
       - name: Extract datasets
         run: |
-          unzip dataset/yelp_dataset_3.zip
+            working-directory: ${TARGET_DIR}
+        run: |
+             unzip *.zip
+
+
 
 
       - name: Upload to Snowflake tables
