@@ -56,7 +56,11 @@ jobs:
         run: |
             unzip ${TARGET_DIR}/*.zip
 
-
+      - name: Extract tgz
+        uses: ihiroky/extract-action@v1
+        with:
+          file_path: ${TARGET_DIR}
+          extract_dir: ${TARGET_DIR}
 
       - name: Upload to Snowflake tables
         env:
