@@ -53,7 +53,7 @@ jobs:
             flags: --recursive
 
       - name: Setting the current directory
-        run:
+        run: |
             working-directory: ${TARGET_DIR}
       - name: Extract datasets
         run: |
