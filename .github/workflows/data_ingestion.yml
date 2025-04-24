@@ -33,15 +33,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install snowflake-connector-python
 
-      - name: Download datasets
+      - name: Configure AWS CLI
         run: |
-          RELEASE_URL="https://yelpdatasetashokkumart.s3.us-east-1.amazonaws.com/"
-          F1_URL="${RELEASE_URL}${DATASET_FILE_NAME}1.zip"
-          F2_URL="${RELEASE_URL}${DATASET_FILE_NAME}2.zip"
-          F3_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
-          wget -q -P ${TARGET_DIR} ${F1_URL}
-          wget -q -P ${TARGET_DIR} ${F2_URL}
-          wget -q -P ${TARGET_DIR} ${F3_URL}
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set region ${{ secrets.AWS_REGION }}
+
+      - name: Download file from S3
+        run: |
+          aws s3 cp s3://yelpdatasetashokkumart.s3.us-east-1.amazonaws.com/* ${TARGET_DIR}
+
 
       - name: Extract datasets
         run: |
