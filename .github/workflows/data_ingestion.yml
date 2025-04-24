@@ -42,14 +42,16 @@ jobs:
       - name: Download file from S3
         run: |
           aws s3 cp s3://yelpdatasetashokkumart/ ${TARGET_DIR}
-        run: | aws s3 ls ${TARGET_DIR}
-        run: | aws s3 ls s3://yelpdatasetashokkumart/
+        run: |
+            aws s3 ls ${TARGET_DIR}
+        run: |
+            aws s3 ls s3://yelpdatasetashokkumart/
 
 
 
       - name: Extract datasets
         run: |
-          for file in $(ls ${TARGET_DIR}/*.zip); do
+          for file in $(ls ${TARGET_DIR}/); do
             echo $file
             unzip -o -j "$file" -d ${TARGET_DIR}/
           done
