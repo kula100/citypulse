@@ -54,11 +54,7 @@ jobs:
 
       - name: Extract datasets
         run: |
-          ls ${TARGET_DIR}/
-          for file in $(ls ${TARGET_DIR}/); do
-            echo $file
-            unzip -o -j "$file" -d ${TARGET_DIR}/
-          done
+          ls ${TARGET_DIR}
 
       - name: Upload to Snowflake tables
         env:
