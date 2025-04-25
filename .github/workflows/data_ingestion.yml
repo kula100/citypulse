@@ -2,10 +2,6 @@ name: Ingest Yelp data into Snowflake
 
 on:
   workflow_dispatch:
-    inputs:
-        version:
-          description: "Release version to download"
-          required: true
 
 jobs:
   download-and-upload-to-snowflake:
