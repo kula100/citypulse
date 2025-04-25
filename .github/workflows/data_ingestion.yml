@@ -33,15 +33,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install snowflake-connector-python
 
-      - name: Download datasets
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Download datasets from S3
         run: |
-          RELEASE_URL="https://github.com/${{ github.repository }}/releases/download/${{ github.event.inputs.version }}/"
-          F1_URL="${RELEASE_URL}${DATASET_FILE_NAME}1.zip"
-          F2_URL="${RELEASE_URL}${DATASET_FILE_NAME}2.zip"
-          F3_URL="${RELEASE_URL}${DATASET_FILE_NAME}3.zip"
-          wget -q -P ${TARGET_DIR} ${F1_URL}
-          wget -q -P ${TARGET_DIR} ${F2_URL}
-          wget -q -P ${TARGET_DIR} ${F3_URL}
+            S3_BUCKET="yelpdatasetashokkumart"
+            #S3_PREFIX="path/to/files/${{ github.event.inputs.version }}/"
+
+            # Create target directory if it doesn't exist
+            mkdir -p ${TARGET_DIR}
+
+            # Download files in a loop
+            for i in 1 2 3; do
+              aws s3 cp "s3://${S3_BUCKET}/${DATASET_FILE_NAME}${i}.zip" ${TARGET_DIR}/
+            done
 
       - name: Extract datasets
         run: |
