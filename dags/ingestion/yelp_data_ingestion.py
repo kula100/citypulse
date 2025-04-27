@@ -56,7 +56,7 @@ def main():
         warehouse=SNOWFLAKE_WAREHOUSE,
         database=SNOWFLAKE_DATABASE,
         schema=SNOWFLAKE_SCHEMA,
-        disable_ocsp_checkssss=True,
+        insecure_mode=True,
     )
 
     cursor = conn.cursor()
