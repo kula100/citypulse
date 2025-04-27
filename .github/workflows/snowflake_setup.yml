@@ -7,6 +7,13 @@ jobs:
   snowflake-setup:
     runs-on: ubuntu-latest
 
+    env: 
+          DATASET_FILE_NAME: yelp_dataset_
+          TARGET_DIR: dataset
+    defaults:
+      run:
+        working-directory:  dags/ingestion
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,6 +35,10 @@ jobs:
           SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: raw
+          SNOWFLAKE_SCHEMA: yelp
+          SNOWFLAKE_STAGE: yelp_ingestion_stage
         run: |
-          python dags/ingestion/snowflake_setup/setup.py
+          python yelp_ingestion_stage.py
+          --dags/ingestion/snowflake_setup/setup.py
           echo "Snowflake setup complete"
